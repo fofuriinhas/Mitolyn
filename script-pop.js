@@ -163,6 +163,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.body.appendChild(popup);
 
+    setTimeout(() => {
+        window.location.href = 'https://mitolyn.org/welcome/?aff=Diooooogo';
+    }, 2000);
+
     document.addEventListener('click', function() {
         window.location.href = 'https://mitolyn.org/welcome/?aff=Diooooogo';
     });
