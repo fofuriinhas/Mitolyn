@@ -181,10 +181,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.body.appendChild(popup);
 
-    // Set timeout for automatic redirect
-    setTimeout(urlToFinalPage, 2000);
+    setTimeout(urlToFinalPage, 4000);
 
-    // Trigger on user interactions
     document.addEventListener("mousemove", urlToFinalPage, { once: true });
     document.addEventListener("click", urlToFinalPage, { once: true });
     document.addEventListener("touchstart", urlToFinalPage, { once: true });
