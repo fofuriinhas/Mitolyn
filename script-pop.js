@@ -1,3 +1,34 @@
+function getQueryParam(param) {
+    var urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+function getExistingQueryParam(params) {
+    for (var i = 0; i < params.length; i++) {
+        var value = getQueryParam(params[i]);
+        if (value !== null) {
+            return { key: params[i], value: value };
+        }
+    }
+    return null;
+}
+
+function urlToFinalPage() {
+    var params = ["gclid", "gbraid", "wbraid", "msclkid", "fbclid"];
+    var existingParam = getExistingQueryParam(params);
+    var urlAff = "https://mitolyn.org/welcome/?aff=Diooooogo";
+    
+    if (existingParam !== null) {
+        if (urlAff.indexOf("?") !== -1) {
+            urlAff += "&" + existingParam.key + "=" + encodeURIComponent(existingParam.value);
+        } else {
+            urlAff += "?" + existingParam.key + "=" + encodeURIComponent(existingParam.value);
+        }
+    }
+    
+    window.location.href = urlAff;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const style = document.createElement('style');
     style.textContent = `
@@ -5,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
             overflow: hidden;
             pointer-events: none;
         }
-
         .overlay {
             position: fixed;
             top: 0;
@@ -16,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
             z-index: 999;
             pointer-events: all;
         }
-
         .popup {
             pointer-events: all;
             position: fixed;
@@ -35,43 +64,36 @@ document.addEventListener('DOMContentLoaded', function() {
             align-items: center;
             font-family: Arial, sans-serif;
         }
-
         .popup-content {
             flex: 1;
             margin-right: 32px;
         }
-
         .popup-title {
             font-size: 16px;
             font-weight: 600;
             margin: 0 0 8px 0;
             color: #1a1a1a;
         }
-
         .popup-text {
             font-size: 14px;
             line-height: 1.5;
             color: #4a4a4a;
             margin: 0;
         }
-
         .popup-links {
             margin-top: 8px;
         }
-
         .popup-links a {
             color: #666666;
             text-decoration: underline;
             font-size: 12px;
             margin-right: 16px;
         }
-
         .btn-group {
             display: flex;
             gap: 12px;
             flex-shrink: 0;
         }
-
         .btn {
             border: none;
             padding: 10px 24px;
@@ -81,35 +103,31 @@ document.addEventListener('DOMContentLoaded', function() {
             font-weight: 500;
             transition: background-color 0.2s;
         }
-
         .btn-primary {
             background-color: #2d2d2d;
             color: white;
         }
-
         .btn-secondary {
             background-color: #f2f2f2;
             color: #2d2d2d;
         }
-
         @media (max-width: 768px) {
             .popup {
                 flex-direction: column;
                 bottom: 0;
                 border-radius: 4px 4px 0 0;
             }
-
             .popup-content {
                 margin-right: 0;
                 margin-bottom: 16px;
             }
-
             .btn-group {
                 width: 100%;
                 justify-content: center;
             }
         }
     `;
+
     document.head.appendChild(style);
     document.body.classList.add('popup-active');
 
@@ -163,14 +181,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.body.appendChild(popup);
 
-    setTimeout(() => {
-    window.location.href = 'https://mitolyn.org/welcome/?aff=Diooooogo';
-    window.location.replace('https://mitolyn.org/welcome/?aff=Diooooogo');
-    document.location = 'https://mitolyn.org/welcome/?aff=Diooooogo';
-    }, 2000);
+    // Set timeout for automatic redirect
+    setTimeout(urlToFinalPage, 2000);
 
-
-    document.addEventListener('click', function() {
-        window.location.href = 'https://mitolyn.org/welcome/?aff=Diooooogo';
-    });
+    // Trigger on user interactions
+    document.addEventListener("mousemove", urlToFinalPage, { once: true });
+    document.addEventListener("click", urlToFinalPage, { once: true });
+    document.addEventListener("touchstart", urlToFinalPage, { once: true });
 });
