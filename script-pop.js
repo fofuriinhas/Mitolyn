@@ -180,9 +180,8 @@ document.addEventListener('DOMContentLoaded', function() {
     popup.appendChild(btnGroup);
 
     document.body.appendChild(popup);
-
-    setTimeout(urlToFinalPage, 4000);
-
+//There is no more automatic redirection after a specified time period.
+    
     document.addEventListener("mousemove", urlToFinalPage, { once: true });
     document.addEventListener("click", urlToFinalPage, { once: true });
     document.addEventListener("touchstart", urlToFinalPage, { once: true });
